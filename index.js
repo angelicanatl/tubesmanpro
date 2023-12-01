@@ -42,7 +42,7 @@ app.listen(PORT, () => {
     console.log(`Server is ready, listening in port ${PORT}`);
 });
 
-app.get('/', async (req, res) => {
+app.get(['/', '/home'], async (req, res) => {
     res.render('home');
 });
 
