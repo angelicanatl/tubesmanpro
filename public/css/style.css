@@ -9,6 +9,9 @@ body {
     height: 100vh;
 }
 
+/*
+STYLING UNTUK HALAMAN HOME
+*/
 .options-container {
     width: fit-content;
     display: grid;
@@ -40,4 +43,28 @@ body {
 
 .option-container:hover {
     transform: scale(1.05);
+}
+
+/*
+STYLING UNTUK HALAMAN UPLOAD DATA
+*/
+label {
+    margin-bottom: 10px;
+}
+
+input[type="file"] {
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
 }
