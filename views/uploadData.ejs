@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Data</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <%- include('header.ejs', { title: 'Your Title', pageTitle: 'Upload Data' }) %>
+
+    <div class="upload-container">
+        <h2>Upload Data</h2>
+        <!-- Form untuk upload data akan ditempatkan di sini -->
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <label for="file">Select File:</label>
+            <input type="file" name="file" id="file" accept=".csv, .xlsx, .xls" required>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+</body>
+
+</html>

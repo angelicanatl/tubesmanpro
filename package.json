@@ -20,8 +20,8 @@
     "mysql": "^2.18.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22",
-    "esm": "^3.2.25"
+    "esm": "^3.2.25",
+    "nodemon": "^2.0.22"
   },
   "type": "module"
 }
