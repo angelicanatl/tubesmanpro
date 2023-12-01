@@ -45,3 +45,7 @@ app.listen(PORT, () => {
 app.get('/', async (req, res) => {
     res.render('home');
 });
+
+app.get('/ringkasan', async (req, res) => {
+    res.render('ringkasan');
+});
