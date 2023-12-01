@@ -49,3 +49,7 @@ app.get('/', async (req, res) => {
 app.get('/ringkasan', async (req, res) => {
     res.render('ringkasan');
 });
+  
+app.get('/header', async (req, res) => {
+    res.render('header');
+});
