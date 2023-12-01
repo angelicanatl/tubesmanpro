@@ -19,10 +19,9 @@ const storage = multer.diskStorage({
     filename: function (req, file, cb) {
         cb(null, file.fieldname + '-' + Date.now())
     }
-})
+});
 
-const upload = multer({ storage: storage });
-
+const upload = multer({ storage: storage }).single('file'); // Tambahkan .single('file') di sini
 
 app.use(express.static(staticPath));
 app.use('/assets', express.static(assetsPath));
@@ -31,6 +30,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.urlencoded({ extended: true }));
+
 app.use(session({
     secret: 'secret_key',
     resave: false,
@@ -49,7 +49,27 @@ app.get('/', async (req, res) => {
 app.get('/ringkasan', async (req, res) => {
     res.render('ringkasan');
 });
-  
+
+app.get('/uploadData', async (req, res) => {
+    res.render('uploadData');
+});
+
+app.post('/upload', (req, res) => {
+    try {
+        upload(req, res, (err) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).send('Error uploading file.');
+            }
+            // Proses upload data di sini
+            res.send('Data berhasil diupload!');
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 app.get('/header', async (req, res) => {
     res.render('header');
 });
