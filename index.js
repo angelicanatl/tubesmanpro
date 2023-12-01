@@ -45,13 +45,3 @@ app.listen(PORT, () => {
 app.get('/', async (req, res) => {
     res.render('home');
 });
-
-app.get('/page_dian', async (req, res) => {
-    res.render('page_dian');
-});
-app.get('/page_robertus', async (req, res) => {
-    res.render('page_robertus');
-});
-app.get('/page_yohanes', async (req, res) => {
-    res.render('page_yohanes');
-});
