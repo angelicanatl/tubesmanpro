@@ -68,3 +68,61 @@ button {
 button:hover {
     background-color: #45a049;
 }
+
+/* Styling Ringkasan data */
+.body-ringkasan-data {
+    /* font-family: Arial, sans-serif; */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+    align-items: unset;
+    justify-content: unset;
+  }
+
+  .left-sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color: #aaa;
+    
+    /* align-items: center; */
+  }
+
+  .checkbox-container {
+    /* margin-right: 20px ; */
+    width: 250px;
+    padding-left: 20px;
+    box-sizing: border-box;
+  }
+
+  h2 {
+    margin: 10px;
+  }
+
+  .tampilkan-tabel {
+    background-color: #F47315;
+    border: none;
+    border-radius: 10px ;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    width: 150px;
+    margin: auto;
+  }
+
+  .tampilkan-tabel:hover {
+    background-color: #fff;
+    color: #F47315;
+  }
+
+  .tabel-ringkasan {
+    /* align-items: center;
+    justify-content: center; */
+    margin: auto;
+    border-collapse: collapse;
+  }
+
+  tr, th, td {
+    border: 2px solid #aaa;
+    text-align: center;
+  }
