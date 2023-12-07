@@ -46,28 +46,8 @@ STYLING UNTUK HALAMAN HOME
 }
 
 /*
-STYLING UNTUK HALAMAN UPLOAD DATA
+STYLING UNTUK HALAMAN UPLOAD DATA di uploadData.css
 */
-label {
-    margin-bottom: 10px;
-}
-
-input[type="file"] {
-    margin-bottom: 20px;
-}
-
-button {
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #45a049;
-}
 
 /* STYLING RINGKASAN DATA */
 .container-ringkasan-data {
@@ -80,11 +60,20 @@ button:hover {
     justify-content: unset;
   }
 
-  .left-sidebar {
+  .isi{
+    display: flex;
+    flex-direction: row;
+    height: 605px;
+  }
+
+  .menu{
+    background-color: #aaa;
+  }
+
+  .menu-bar {
     display: flex;
     flex-direction: column;
-    background-color: #aaa;
-    
+    /* height: 1vh; */
     /* align-items: center; */
   }
 
@@ -108,11 +97,16 @@ button:hover {
     padding: 10px;
     width: 150px;
     margin: auto;
+    margin-top: 20px;
   }
 
   .tampilkan-tabel:hover {
     background-color: #fff;
     color: #F47315;
+  }
+
+  .tabel-area{
+    height: 100%;
   }
 
   .tabel-ringkasan {
