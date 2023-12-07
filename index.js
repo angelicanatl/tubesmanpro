@@ -46,9 +46,38 @@ app.get(['/', '/home'], async (req, res) => {
     res.render('home');
 });
 
+//ringkasan
 app.get('/ringkasan', async (req, res) => {
     res.render('ringkasan');
 });
+
+const per_kat = (conn, group) => {
+    return new Promise((resolve, reject) => {
+        conn.query('SELECT * GROUP BY ?', group, (err, result) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+
+app.post('/showTabel', (req, res) => {
+    let by = req.body.by;
+    console.log(by);
+    // if(by=="tanggal-transaksi"){
+    //     res.json(tabelTanggal);
+    // }else if(by=="jenjang-pendidikan"){
+    //     res.json(tabelJenjang);
+    // }else if(by=="status"){
+    //     res.json(tabelStatus);
+    // }else{
+    //     res.status(400).send('Input tidak dikenal');
+    //     return;
+    // }
+})
 
 app.get('/uploadData', async (req, res) => {
     res.render('uploadData');
