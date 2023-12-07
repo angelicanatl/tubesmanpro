@@ -4,9 +4,77 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ringkasan Data</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="/js/ringkasan.js" defer></script>
 </head>
-<body>
-    <h1>tes</h1>
+
+<body class="body-ringkasan-data">
+    <form class="left-sidebar"  action="" method="get" target="_self">
+      <div class="checkbox-container group-by">
+        <h2>Group By</h2>
+        <label><input type="checkbox" name="tanggal-transaksi" checked="checked">Tanggal Transaksi</label><br>
+        <label><input type="checkbox" name="jenjang-pendidikan">Jenjang Pendidikan</label><br>
+        <label><input type="checkbox" name="status">Status</label><br>
+      </div>
+      <div class="checkbox-container banyak-produk">
+        <h2>Banyak Produk</h2>
+        <label><input type="checkbox" name="wine">Wine</label><br>
+        <label><input type="checkbox" name="buah-buahan">Buah-Buahan</label><br>
+        <label><input type="checkbox" name="daging">Daging</label><br>
+        <label><input type="checkbox" name="ikan">Ikan</label><br>
+        <label><input type="checkbox" name="makanan-manis">Makanan Manis</label><br>
+        <label><input type="checkbox" name="emas">Emas</label><br>
+      </div>
+      <div class="checkbox-container tempat-transaksi">
+        <h2>Tempat Transaksi</h2>
+        <label><input type="checkbox" name="web">Web</label><br>
+        <label><input type="checkbox" name="katalog">Katalog</label><br>
+        <label><input type="checkbox" name="toko">Toko</label><br>
+      </div>
+      <div class="checkbox-container pendapatan">
+        <h2>Pendapatan</h2>
+        <label><input type="checkbox" name="rata-rata">Rata-Rata</label><br>
+        <label><input type="checkbox" name="total">Total</label><br>
+      </div>
+      <button class="tampilkan-tabel" type="button" onclick="submitForm()">Tampilkan Tabel</button>
+    </form>
+    <table class="tabel-ringkasan" width="60%">
+      <tr>
+        <th>kolom 1</th>
+        <th>kolom 2</th>
+        <th>kolom 3</th>
+      </tr>
+      <tr>
+        <td>data 1</td>
+        <td>data 2</td>
+        <td>data 3</td>
+      </tr>
+      <tr>
+        <td>data 1</td>
+        <td>data 2</td>
+        <td>data 3</td>
+      </tr>
+      <tr>
+        <td>data 1</td>
+        <td>data 2</td>
+        <td>data 3</td>
+      </tr>
+      <tr>
+        <td>data 1</td>
+        <td>data 2</td>
+        <td>data 3</td>
+      </tr>
+      <tr>
+        <td>data 1</td>
+        <td>data 2</td>
+        <td>data 3</td>
+      </tr>
+      <tr>
+        <td>data 1</td>
+        <td>data 2</td>
+        <td>data 3</td>
+      </tr>
+    </table>
 </body>
 </html>
