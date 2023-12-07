@@ -1,8 +1,8 @@
-*{
+* {
     font-family: system-ui;
 }
 
-h2{
+h2 {
     text-align: center;
     font-size: 30px;
 }
@@ -17,7 +17,7 @@ h2{
     justify-content: center;
 }
 
-.pembungkus_import_data{
+.pembungkus_import_data {
     background-color: #FFEAD9;
     width: 400px;
     height: 250px;
@@ -30,8 +30,8 @@ h2{
 
 .custom-file-upload input[type="file"] {
     display: none;
-  }
-  
+}
+
 .custom-file-upload span {
     display: inline-block;
     background-color: #F47315;
@@ -44,12 +44,12 @@ h2{
     font-family: system-ui;
     font-weight: bold;
 }
-  
-  .custom-file-upload span:hover {
-    background-color: #ebaf7e;
-  }
 
-  .import_button_data{
+.custom-file-upload span:hover {
+    background-color: #ebaf7e;
+}
+
+.import_button_data {
     padding-top: 20px;
     font-family: system-ui;
 }
@@ -62,4 +62,5 @@ h2{
     border: none;
     padding: 7px 20px;
     transition: 0.2s ease-in;
+    cursor: pointer;
 }
