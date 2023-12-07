@@ -1,0 +1,6 @@
+﻿"ID,Year_Birth,Education,Marital_Status,Income,Kidhome,Teenhome,Dt_Customer,Recency,MntWines,MntFruits,MntMeatProducts,MntFishProducts,MntSweetProducts,MntGoldProds,NumDealsPurchases,NumWebPurchases,NumCatalogPurchases,NumStorePurchases,NumWebVisitsMonth,AcceptedCmp3,AcceptedCmp4,AcceptedCmp5,AcceptedCmp1,AcceptedCmp2,Complain,Response
+1,1980,Graduation,Single,50000,1,0,2018-01-15,20,100,10,50,10,5,20,2,5,3,6,10,1,0,1,0,0,0,0
+2,1975,PhD,Married,80000,0,1,2017-05-20,15,150,15,75,20,10,25,1,4,2,5,8,0,1,0,1,0,0,0
+3,1988,Master,Single,60000,0,0,2016-11-10,30,80,8,40,5,8,15,3,6,5,8,15,1,0,1,0,1,0,0
+4,1970,Graduation,Married,70000,1,1,2015-09-05,10,120,12,60,15,12,30,2,7,4,7,12,0,0,1,0,0,0,1
+5,1985,PhD,Single,75000,1,2,2014-04-02,5,200,20,100,25,15,35,1,8,3,6,20,1,1,0,1,0,0,0"

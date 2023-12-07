@@ -6,20 +6,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Data</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/uploadData.css">
 </head>
 
 <body>
     <%- include('header.ejs', { title: 'Your Title', pageTitle: 'Upload Data' }) %>
 
     <div class="upload-container">
-        <h2>Upload Data</h2>
-        <!-- Form untuk upload data akan ditempatkan di sini -->
-        <form action="/upload" method="post" enctype="multipart/form-data">
-            <label for="file">Select File:</label>
-            <input type="file" name="file" id="file" accept=".csv, .xlsx, .xls" required>
-            <button type="submit">Upload</button>
-        </form>
+        <h2>Import Data</h2>
+        <form action="/uploadData" method="POST" enctype="multipart/form-data">
+            <div class="navigator_import_data">
+              <div class="pembungkus_import_data">
+                <div class="img_import_data">
+                  <img src="../assets/icon/upload.jpg" height="150px" width="150px">
+                </div>
+                <label for="file_upload" class="custom-file-upload">
+                  <span>Upload File</span>
+                  <input type="file" id="file_upload" name="file_upload">
+                </label>
+              </div>
+              <div class="import_button_data">
+                <button type="submit" class="blue_button">Import</button>
+              </div>
+            </div>
+        </form>    
     </div>
 </body>
 

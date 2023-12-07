@@ -4,7 +4,8 @@
 -- SET time_zone = "+00:00";
 
 CREATE TABLE `Marketing_Campaign` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `No` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `ID` int(11) NOT NULL,
   `Year_Birth` year(4) NOT NULL,
   `Education` varchar(20) NOT NULL,
   `Marital_Status` varchar(20) NOT NULL,
