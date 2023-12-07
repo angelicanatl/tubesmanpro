@@ -3,7 +3,7 @@ import mysql from 'mysql';
 const pool = mysql.createPool({
   user: "root",
   password: "",
-  database: "diary",
+  database: "manpro",
   host: "localhost",
 });
 
