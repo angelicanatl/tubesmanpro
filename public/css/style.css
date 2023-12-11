@@ -46,6 +46,30 @@ STYLING UNTUK HALAMAN HOME
 }
 
 /*
+STYLING UNTUK HALAMAN UPLOAD DATA
+*/
+label {
+    margin-bottom: 10px;
+}
+
+input[type="file"] {
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Styling Ringkasan data
 STYLING UNTUK HALAMAN UPLOAD DATA di uploadData.css
 */
 
@@ -60,6 +84,11 @@ STYLING UNTUK HALAMAN UPLOAD DATA di uploadData.css
     justify-content: unset;
   }
 
+  .left-sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color: #aaa;
+    
   .isi{
     display: flex;
     flex-direction: row;
@@ -97,6 +126,7 @@ STYLING UNTUK HALAMAN UPLOAD DATA di uploadData.css
     padding: 10px;
     width: 150px;
     margin: auto;
+
     margin-top: 20px;
   }
 
@@ -108,7 +138,6 @@ STYLING UNTUK HALAMAN UPLOAD DATA di uploadData.css
   .tabel-area{
     height: 100%;
   }
-
   .tabel-ringkasan {
     /* align-items: center;
     justify-content: center; */

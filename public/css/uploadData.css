@@ -1,4 +1,4 @@
-* {
+*{
     font-family: system-ui;
 }
 
@@ -48,6 +48,10 @@ h2 {
     font-family: system-ui;
     font-weight: bold;
 }
+  
+  .custom-file-upload span:hover {
+    background-color: #ebaf7e;
+  }
 
 .custom-file-upload span:hover {
     background-color: #ebaf7e;
