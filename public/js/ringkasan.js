@@ -1,11 +1,5 @@
 const tableRingkasan = document.querySelector("table.tabel-ringkasan");
 const groupby = document.querySelectorAll("#group-by input");
-const back = document.querySelector(".backButton");
-
-back.addEventListener("click", function() {
-    // Go back in the browser history
-    window.history.back();
-});
 
 let obj; 
 const selectedColumns = [];

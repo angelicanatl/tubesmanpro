@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bar Chart</title>
+    <link rel="stylesheet" href="css/barChart.css">
+    <script src="js/barChart.js" defer></script>
+</head>
+
+<body>
+    <%- include('header.ejs', { title: 'Data Promosi Toko Retail', pageTitle: 'Bar Chart' }) %>
+    <div id="bar-container">
+        <h2>Bar Chart</h2>
+        <form>
+            <div id="axes">
+                <h4 class="axis">Set Axes</h4>
+                <label class="axis">Axis X:</label>
+                <select class="axis" id="x">
+                    <option>a</option>
+                    <option>b</option>
+                    <option>c</option>
+                </select>
+                <label class="axis">Axis Y:</label>
+                <select class="axis" id="y">
+                    <option>d</option>
+                    <option>e</option>
+                    <option>f</option>
+                </select>
+                <div class="axis">
+                    <button type="submit" id="viewBarChart">Submit</button>
+                </div>
+            </div>
+        </form> 
+        <div id="chart">
+            
+        </div>   
+    </div>
+</body>
+
+</html>

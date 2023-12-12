@@ -49,13 +49,6 @@ app.use(session({
     cookie: { maxAge: 1000 * 60 * 60 * 24 }
 }));
 
-const pool = mysql.createPool({
-    user: "root",
-    password: "",
-    database: "manpro",
-    host: "localhost",
-});
-
 const db = () => {
     return new Promise((resolve, reject) => {
         pool.getConnection((err, conn) => {
@@ -254,3 +247,8 @@ const importCsvDataToDatabase = async (filePath, columnHeaders) => {
     }
 };
 
+
+//bar chart
+app.get('/barChart', async (req, res) => {
+    res.render('barChart');
+});

@@ -1,4 +1,4 @@
-const back = document.querySelector(".backButton");
+const back = document.querySelector(".homeButton");
 window.addEventListener("load", () => {
     console.log("tes");
     if (back) {
