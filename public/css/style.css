@@ -29,6 +29,7 @@ STYLING UNTUK HALAMAN HOME
     padding: 50px; /* Adjust padding as needed */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
+    background-color: #FFEAD9;
 }
 
 .option-container img {
@@ -39,6 +40,7 @@ STYLING UNTUK HALAMAN HOME
 
 .option-container h4 {
     margin-top: 10px; /* Adjust margin as needed */
+    color: black;
 }
 
 .option-container:hover {
