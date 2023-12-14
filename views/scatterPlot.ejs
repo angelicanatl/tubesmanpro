@@ -7,44 +7,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scatter Plot</title>
     <link rel="stylesheet" href="css/scatterPlot.css">
-    <script src="js/scatterPlot.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
+    <script src="js/scatter.js" defer></script>
 </head>
 
 <body>
-    <%- include('header.ejs', { title: 'Data Promosi Toko Retail', pageTitle: 'Scatter Plot' }) %>
-    <div id="scatter-container">
-        <h2>Scatter Plot</h2>
-        <form>
-            <div id="axes">
-                <h4 class="axis">Set Axes</h4>
-                <label class="axis">Axis X:</label>
-                <select class="axis" id="x">
-                    <option>a</option>
-                    <option>b</option>
-                    <option>c</option>
-                </select>
-                <label class="axis">Axis Y:</label>
-                <select class="axis" id="y">
-                    <option>d</option>
-                    <option>e</option>
-                    <option>f</option>
-                </select>
-                <h4 class="axis">Attributes</h4>
-                <label class="axis">Color:</label>
-                <select class="axis" id="y">
-                    <option>g</option>
-                    <option>h</option>
-                    <option>i</option>
-                </select>
-                <div class="axis">
-                    <button type="submit" id="viewScatterPlot">Submit</button>
+    <%- include('header.ejs', { title: 'Data Promosi Toko Retail' , pageTitle: 'Scatter Plot' }) %>
+        <div id="scatter-container">
+            <h2>Scatter Plot</h2>
+            <form id="scatter-form">
+                <div id="axes">
+                    <h4 class="axis">Set Axes</h4>
+                    <label class="axis">Axis X:</label>
+                    <select class="axis" id="x" name="x">
+                        <% columns.forEach(column=> { %>
+                            <option value="<%= column %>" title="<%= column %>">
+                                <%= column %>
+                            </option>
+                            <% }); %>
+                    </select>
+
+                    <label class="axis">Axis Y:</label>
+                    <select class="axis" id="y" name="y">
+                        <% columns.forEach(column=> { %>
+                            <option value="<%= column %>" title="<%= column %>">
+                                <%= column %>
+                            </option>
+                            <% }); %>
+                    </select>
+
+                    <h4 class="axis">Attributes</h4>
+                    <label class="axis">Color:</label>
+                    <select class="axis" id="color" name="color">
+                        <option>Red</option>
+                        <option>Green</option>
+                        <option>Blue</option>
+                    </select>
+                    <div class="axis">
+                        <button id="viewScatterPlot">Submit</button>
+                    </div>
+                </div>
+            </form>
+            <div id="plot-container">
+                <div id="plot">
+                    <!-- Scatter plot will be dynamically inserted here -->
                 </div>
             </div>
-        </form> 
-        <div id="plot">
-            
-        </div>   
-    </div>
+        </div>
 </body>
 
 </html>
