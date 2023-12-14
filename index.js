@@ -82,6 +82,7 @@ app.get('/header', async (req, res) => {
     res.render('header');
 });
 
+//upload data -----------------------------------------------------------------------------------------------------------------------
 app.get('/uploadData', async (req, res) => {
     res.render('uploadData');
 });
@@ -145,12 +146,42 @@ app.post('/uploadData', upload.single('file_upload'), (req, res) => {
   });
 });
 
-//bar chart
+//ringkasan data ---------------------------------------------------------------------------------------------------------------------
+app.use(bodyParser.json());
+
+let isiData = null;
+
+app.get('/ringkasan', async (req, res) => {
+    res.render('ringkasan', {
+        data: isiData
+    });
+});
+
+app.post('/ringkasan', (req, res) => {
+    const {query} = req.body;
+    // Execute the query
+    pool.query(query, (err, results) => {
+        console.log(results);
+        if (err) {
+            console.error('Error executing query:', err);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }else{
+            isiData = results;
+            console.log(isiData);
+            // Send the query results as JSON
+            res.json({ 
+                data: isiData 
+            });
+        }
+    });
+});
+
+//bar chart ------------------------------------------------------------------------------------------------------------------------
 app.get('/barChart', async (req, res) => {
     res.render('barChart');
 });
 
-//scatter plot
+//scatter plot ---------------------------------------------------------------------------------------------------------------------
 app.get('/scatterPlot', async (req, res) => {
     try {
         const result = await getColumnsName();
