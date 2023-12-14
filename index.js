@@ -36,7 +36,7 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({ dest: 'uploads/' });// Tambahkan .single('file') di sini
+const upload = multer({ dest: 'uploads/' });
 
 
 app.use(express.static(staticPath));
@@ -47,7 +47,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(session({
     cookie: { maxAge: 86400000 },
     store: new MemoryStore({
-      checkPeriod: 86400000, // prune expired entries every 24h
+      checkPeriod: 86400000, 
     }),
     resave: false,
     saveUninitialized: false,
@@ -77,22 +77,6 @@ app.get(['/', '/home'], async (req, res) => {
 app.get('/ringkasan', async (req, res) => {
     res.render('ringkasan');
 });
-
-// app.post('/upload', (req, res) => {
-//     try {
-//         upload(req, res, (err) => {
-//             if (err) {
-//                 console.error(err);
-//                 return res.status(500).send('Error uploading file.');
-//             }
-//             // Proses upload data di sini
-//             res.send('Data berhasil diupload!');
-//         });
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).send('Internal Server Error');
-//     }
-// });
 
 app.get('/header', async (req, res) => {
     res.render('header');
@@ -160,7 +144,6 @@ app.post('/uploadData', upload.single('file_upload'), (req, res) => {
       });
   });
 });
-
 
 //bar chart
 app.get('/barChart', async (req, res) => {
