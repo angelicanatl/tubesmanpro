@@ -36,7 +36,7 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({ dest: 'uploads/' });// Tambahkan .single('file') di sini
+const upload = multer({ dest: 'uploads/' });
 
 
 app.use(express.static(staticPath));
@@ -47,7 +47,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(session({
     cookie: { maxAge: 86400000 },
     store: new MemoryStore({
-      checkPeriod: 86400000, // prune expired entries every 24h
+      checkPeriod: 86400000, 
     }),
     resave: false,
     saveUninitialized: false,
@@ -77,22 +77,6 @@ app.get(['/', '/home'], async (req, res) => {
 app.get('/ringkasan', async (req, res) => {
     res.render('ringkasan');
 });
-
-// app.post('/upload', (req, res) => {
-//     try {
-//         upload(req, res, (err) => {
-//             if (err) {
-//                 console.error(err);
-//                 return res.status(500).send('Error uploading file.');
-//             }
-//             // Proses upload data di sini
-//             res.send('Data berhasil diupload!');
-//         });
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).send('Internal Server Error');
-//     }
-// });
 
 app.get('/header', async (req, res) => {
     res.render('header');
@@ -160,98 +144,6 @@ app.post('/uploadData', upload.single('file_upload'), (req, res) => {
       });
   });
 });
-
-// app.post('/uploadData', upload.single('file_upload'), async (req, res) => {
-//     try {
-//         const filePath = path.join(uploadPath, req.file.filename);
-
-//         // Read column headers from CSV
-//         const columnHeaders = await readColumnHeaders(filePath);
-//         console.log(columnHeaders);
-//         // Create table in database
-//         await createTableInDatabase(columnHeaders);
-
-//         // Import data from CSV to the database
-//         await importCsvDataToDatabase(filePath, columnHeaders);
-
-//         res.send('File uploaded successfully and table created in the database.');
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).send('Internal Server Error');
-//     }
-// });
-
-// const readColumnHeaders = async (filePath) => {
-//     return new Promise((resolve, reject) => {
-//         const columnHeaders = [];
-
-//         fs.createReadStream(filePath)
-//             .pipe(csv({ separator: ';' }))
-//             .on('data', (row) => {
-//                 // Assuming the first row of the CSV contains headers
-//                 if (columnHeaders.length === 0) {
-//                     for (const header of Object.keys(row)) {
-//                         columnHeaders.push(header.trim());
-//                     }
-//                     resolve(columnHeaders);
-//                 }
-//             })
-//             .on('error', (error) => {
-//                 reject(error);
-//             });
-//     });
-// };
-
-
-
-
-// const createTableInDatabase = async (columnHeaders) => {
-//     try {
-//         const conn = await db();
-
-//         const createTableQuery = `
-//     CREATE TABLE IF NOT EXISTS uploaded_data (
-//         ${columnHeaders.map(header => `${header} VARCHAR(255)`).join(',\n')}
-//     )
-// `;
-
-
-//         console.log('Create Table Query:', createTableQuery);
-
-//         await conn.query(createTableQuery);
-
-//         conn.release();
-//     } catch (error) {
-//         console.error('Error creating table:', error.message);
-//         throw error;
-//     }
-// };
-
-
-
-
-// const importCsvDataToDatabase = async (filePath, columnHeaders) => {
-//     try {
-//         const conn = await db();
-
-//         const insertQuery = `
-//             LOAD DATA LOCAL INFILE ? INTO TABLE uploaded_data
-//             FIELDS TERMINATED BY ',' 
-//             ENCLOSED BY '"'
-//             LINES TERMINATED BY '\\n'
-//             IGNORE 1 ROWS
-//             (${columnHeaders.join(', ')})
-//         `;
-
-//         await conn.query(insertQuery, [filePath]);
-
-//         conn.release();
-//     } catch (error) {
-//         console.error('Error importing data:', error);
-//         throw error;
-//     }
-// };
-
 
 //bar chart
 app.get('/barChart', async (req, res) => {
