@@ -74,30 +74,11 @@ app.get(['/', '/home'], async (req, res) => {
     res.render('home');
 });
 
-app.get('/ringkasan', async (req, res) => {
-    res.render('ringkasan');
-});
-
-// app.post('/upload', (req, res) => {
-//     try {
-//         upload(req, res, (err) => {
-//             if (err) {
-//                 console.error(err);
-//                 return res.status(500).send('Error uploading file.');
-//             }
-//             // Proses upload data di sini
-//             res.send('Data berhasil diupload!');
-//         });
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).send('Internal Server Error');
-//     }
-// });
-
 app.get('/header', async (req, res) => {
     res.render('header');
 });
 
+//upload data -----------------------------------------------------------------------------------------------------------------------
 app.get('/uploadData', async (req, res) => {
     res.render('uploadData');
 });
@@ -251,14 +232,58 @@ app.post('/uploadData', upload.single('file_upload'), (req, res) => {
 //         throw error;
 //     }
 // };
+// app.post('/upload', (req, res) => {
+//     try {
+//         upload(req, res, (err) => {
+//             if (err) {
+//                 console.error(err);
+//                 return res.status(500).send('Error uploading file.');
+//             }
+//             // Proses upload data di sini
+//             res.send('Data berhasil diupload!');
+//         });
+//     } catch (err) {
+//         console.error(err);
+//         res.status(500).send('Internal Server Error');
+//     }
+// });
 
+//ringkasan data ---------------------------------------------------------------------------------------------------------------------
+app.use(bodyParser.json());
 
-//bar chart
+let isiData = null;
+
+app.get('/ringkasan', async (req, res) => {
+    res.render('ringkasan', {
+        data: isiData
+    });
+});
+
+app.post('/ringkasan', (req, res) => {
+    const {query} = req.body;
+    // Execute the query
+    pool.query(query, (err, results) => {
+        console.log(results);
+        if (err) {
+            console.error('Error executing query:', err);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }else{
+            isiData = results;
+            console.log(isiData);
+            // Send the query results as JSON
+            res.json({ 
+                data: isiData 
+            });
+        }
+    });
+});
+
+//bar chart ------------------------------------------------------------------------------------------------------------------------
 app.get('/barChart', async (req, res) => {
     res.render('barChart');
 });
 
-//scatter plot
+//scatter plot ---------------------------------------------------------------------------------------------------------------------
 app.get('/scatterPlot', async (req, res) => {
     res.render('scatterPlot');
 });
