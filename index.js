@@ -98,7 +98,7 @@ app.post('/uploadData', upload.single('file_upload'), (req, res) => {
     }
 
     fs.createReadStream(csvFile.path)
-      .pipe(csvParser())
+      .pipe(csvParser(";"))
       .on('data', (row) => {
         const marketing_campaign = {
             ID: row.ID,
@@ -152,5 +152,53 @@ app.get('/barChart', async (req, res) => {
 
 //scatter plot
 app.get('/scatterPlot', async (req, res) => {
-    res.render('scatterPlot');
+    try {
+        const result = await getColumnsName();
+        // Check if the result is an object and has the expected structure
+        if (result && Array.isArray(result)) {
+            const columns = result.map(column => column.Field);
+            res.render('scatterPlot', { columns:columns });
+        } else {
+            throw new Error('Unexpected query result structure');
+        }
+    } catch (error) {
+        console.error('Error fetching column names:', error);
+        res.status(500).send('Internal Server Error');
+    }
 });
+
+const getColumnsName = async () => {
+    return new Promise(async (resolve, reject) =>{
+        const query = `SHOW COLUMNS FROM marketing_campaign`;
+        const conn = await db();
+        conn.query(query, (error, results) =>{
+            if(error){
+                reject(error);
+            }else{
+                resolve(results);
+            }
+        })
+    })
+}
+
+app.get('/scatterData', (req, res) => {
+    const { x, y, color } = req.query;
+
+    // Ganti query ini sesuai dengan struktur dan nama tabel di database Anda
+    const query = `SELECT ${x} as x, ${y} as y, '${color}' as color FROM marketing_campaign`;
+    console.log(x, y, color)
+    pool.query(query, (error, results) => {
+        if (error) {
+            console.error('Error fetching scatter plot data:', error);
+            res.status(500).send('Internal Server Error');
+        } else {
+            console.log(results);
+            res.json(results);
+        }
+    });
+});
+
+
+
+
+

@@ -34,3 +34,13 @@ body {
     padding: 10px;
     width: 150px;
 }
+
+.axis option {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.axis option:hover {
+    background-color: #e0e0e0; /* Change the background color on hover */
+}
