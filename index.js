@@ -8,7 +8,6 @@ import fs from 'fs';
 import csvParser from 'csv-parser';
 import memorystore from 'memorystore'; 
 
-
 const PORT = 3619;
 const app = express();
 
@@ -20,12 +19,10 @@ const pool = mysql.createPool({
 
 });
 
-
 const staticPath = path.resolve('public');
 const assetsPath = path.resolve('assets');
 const uploadPath = path.resolve('uploads');
 const MemoryStore = memorystore(session);
-
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -78,26 +75,11 @@ app.get('/ringkasan', async (req, res) => {
     res.render('ringkasan');
 });
 
-// app.post('/upload', (req, res) => {
-//     try {
-//         upload(req, res, (err) => {
-//             if (err) {
-//                 console.error(err);
-//                 return res.status(500).send('Error uploading file.');
-//             }
-//             // Proses upload data di sini
-//             res.send('Data berhasil diupload!');
-//         });
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).send('Internal Server Error');
-//     }
-// });
-
 app.get('/header', async (req, res) => {
     res.render('header');
 });
 
+//upload data -----------------------------------------------------------------------------------------------------------------------
 app.get('/uploadData', async (req, res) => {
     res.render('uploadData');
 });
@@ -114,7 +96,7 @@ app.post('/uploadData', upload.single('file_upload'), (req, res) => {
     }
 
     fs.createReadStream(csvFile.path)
-      .pipe(csvParser())
+      .pipe(csvParser(";"))
       .on('data', (row) => {
         const marketing_campaign = {
             ID: row.ID,
@@ -161,172 +143,90 @@ app.post('/uploadData', upload.single('file_upload'), (req, res) => {
   });
 });
 
-// app.post('/uploadData', upload.single('file_upload'), async (req, res) => {
-//     try {
-//         const filePath = path.join(uploadPath, req.file.filename);
+//ringkasan data ---------------------------------------------------------------------------------------------------------------------
+app.use(bodyParser.json());
 
-//         // Read column headers from CSV
-//         const columnHeaders = await readColumnHeaders(filePath);
-//         console.log(columnHeaders);
-//         // Create table in database
-//         await createTableInDatabase(columnHeaders);
+let isiData = null;
 
-//         // Import data from CSV to the database
-//         await importCsvDataToDatabase(filePath, columnHeaders);
+app.get('/ringkasan', async (req, res) => {
+    res.render('ringkasan', {
+        data: isiData
+    });
+});
 
-//         res.send('File uploaded successfully and table created in the database.');
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).send('Internal Server Error');
-//     }
-// });
+app.post('/ringkasan', (req, res) => {
+    const {query} = req.body;
+    // Execute the query
+    pool.query(query, (err, results) => {
+        console.log(results);
+        if (err) {
+            console.error('Error executing query:', err);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }else{
+            isiData = results;
+            console.log(isiData);
+            // Send the query results as JSON
+            res.json({ 
+                data: isiData 
+            });
+        }
+    });
+});
 
-// const readColumnHeaders = async (filePath) => {
-//     return new Promise((resolve, reject) => {
-//         const columnHeaders = [];
-
-//         fs.createReadStream(filePath)
-//             .pipe(csv({ separator: ';' }))
-//             .on('data', (row) => {
-//                 // Assuming the first row of the CSV contains headers
-//                 if (columnHeaders.length === 0) {
-//                     for (const header of Object.keys(row)) {
-//                         columnHeaders.push(header.trim());
-//                     }
-//                     resolve(columnHeaders);
-//                 }
-//             })
-//             .on('error', (error) => {
-//                 reject(error);
-//             });
-//     });
-// };
-
-
-
-
-// const createTableInDatabase = async (columnHeaders) => {
-//     try {
-//         const conn = await db();
-
-//         const createTableQuery = `
-//     CREATE TABLE IF NOT EXISTS uploaded_data (
-//         ${columnHeaders.map(header => `${header} VARCHAR(255)`).join(',\n')}
-//     )
-// `;
-
-
-//         console.log('Create Table Query:', createTableQuery);
-
-//         await conn.query(createTableQuery);
-
-//         conn.release();
-//     } catch (error) {
-//         console.error('Error creating table:', error.message);
-//         throw error;
-//     }
-// };
-
-
-
-
-// const importCsvDataToDatabase = async (filePath, columnHeaders) => {
-//     try {
-//         const conn = await db();
-
-//         const insertQuery = `
-//             LOAD DATA LOCAL INFILE ? INTO TABLE uploaded_data
-//             FIELDS TERMINATED BY ',' 
-//             ENCLOSED BY '"'
-//             LINES TERMINATED BY '\\n'
-//             IGNORE 1 ROWS
-//             (${columnHeaders.join(', ')})
-//         `;
-
-//         await conn.query(insertQuery, [filePath]);
-
-//         conn.release();
-//     } catch (error) {
-//         console.error('Error importing data:', error);
-//         throw error;
-//     }
-// };
-
-
-//bar chart
+//bar chart ------------------------------------------------------------------------------------------------------------------------
 app.get('/barChart', async (req, res) => {
-
     res.render('barChart');
 });
 
-app.get('/getKecamatan', async (req, res) => {
-    const xAxis = req.query.x;
-    console.log(xAxis) ;
-    const xColumn = await getXAxis(xAxis) ;
-  
-    res.send(xColumn) ;
-  
-  });
-
-const conn = db ;
-
-const getXAxis = (column) => {
-
-    const query = `select ${x} from (select ${x}, ${y} from Marketing_Campaign group by ${y})` ;
-    
-    return new Promise((resolve, reject) => {
-        conn.query(query, (err, result) => {
-            if(err) {
-                reject(err) ;
-            }else{
-                const data = JSON.parse(JSON.stringify(result));
-                resolve(data);
-                console.log('X-Axis:', data);
-            }
-        }) ;
-    });
-
-}
-const getYAxis = (column) => {
-
-    const query = `select count(${x}) from (select ${x}, ${y} from Marketing_Campaign group by ${y})` ;
-    
-    return new Promise((resolve, reject) => {
-        conn.query(query, (err, result) => {
-            if(err) {
-                reject(err) ;
-            }else{
-                const data = JSON.parse(JSON.stringify(result));
-                resolve(data);
-                console.log('Y-Axis:', data);
-            }
-        }) ;
-    });
-
-}
-
-// const joinXandY = (xColumn, yColumn) => {
-
-//     const x = getXAxis(xColumn) ;
-//     const y = getYAxis(yColumn) ;
-
-//     const query = `select ${x} from (select ${x}, ${y} from Marketing_Campaign group by ${y})` ;
-
-//     return new Promise((resolve, reject) => {
-//         conn.query(query, (err, result) => {
-//             if(err) {
-//                 reject(err) ;
-//             }else{
-//                 const data = JSON.parse(JSON.stringify(result));
-//                 resolve(data);
-//                 console.log('Y-Axis:', data);
-//             }
-//         }) ;
-//     });
-
-// }
-
-//scatter plot
+//scatter plot ---------------------------------------------------------------------------------------------------------------------
 app.get('/scatterPlot', async (req, res) => {
-    res.render('scatterPlot');
+    try {
+        const result = await getColumnsName();
+        // Check if the result is an object and has the expected structure
+        if (result && Array.isArray(result)) {
+            const columns = result.map(column => column.Field);
+            res.render('scatterPlot', { columns:columns });
+        } else {
+            throw new Error('Unexpected query result structure');
+        }
+    } catch (error) {
+        console.error('Error fetching column names:', error);
+        res.status(500).send('Internal Server Error');
+    }
 });
+
+const getColumnsName = async () => {
+    return new Promise(async (resolve, reject) =>{
+        const query = `SHOW COLUMNS FROM marketing_campaign`;
+        const conn = await db();
+        conn.query(query, (error, results) =>{
+            if(error){
+                reject(error);
+            }else{
+                resolve(results);
+            }
+        })
+    })
+}
+
+app.get('/scatterData', (req, res) => {
+    const { x, y, color } = req.query;
+
+    // Ganti query ini sesuai dengan struktur dan nama tabel di database Anda
+    const query = `SELECT ${x} as x, ${y} as y, '${color}' as color FROM marketing_campaign`;
+    console.log(x, y, color)
+    pool.query(query, (error, results) => {
+        if (error) {
+            console.error('Error fetching scatter plot data:', error);
+            res.status(500).send('Internal Server Error');
+        } else {
+            console.log(results);
+            res.json(results);
+        }
+    });
+});
+
+
+
+
+

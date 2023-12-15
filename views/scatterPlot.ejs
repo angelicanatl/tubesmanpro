@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scatter Plot</title>
+    <link rel="stylesheet" href="css/scatterPlot.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
+    <script src="js/scatter.js" defer></script>
+</head>
+
+<body>
+    <%- include('header.ejs', { title: 'Data Promosi Toko Retail' , pageTitle: 'Scatter Plot' }) %>
+        <div id="scatter-container">
+            <h2>Scatter Plot</h2>
+            <form id="scatter-form">
+                <div id="axes">
+                    <h4 class="axis">Set Axes</h4>
+                    <label class="axis">Axis X:</label>
+                    <select class="axis" id="x" name="x">
+                        <% columns.forEach(column=> { %>
+                            <option value="<%= column %>" title="<%= column %>">
+                                <%= column %>
+                            </option>
+                            <% }); %>
+                    </select>
+
+                    <label class="axis">Axis Y:</label>
+                    <select class="axis" id="y" name="y">
+                        <% columns.forEach(column=> { %>
+                            <option value="<%= column %>" title="<%= column %>">
+                                <%= column %>
+                            </option>
+                            <% }); %>
+                    </select>
+
+                    <h4 class="axis">Attributes</h4>
+                    <label class="axis">Color:</label>
+                    <select class="axis" id="color" name="color">
+                        <option>Red</option>
+                        <option>Green</option>
+                        <option>Blue</option>
+                    </select>
+                    <div class="axis">
+                        <button id="viewScatterPlot">Submit</button>
+                    </div>
+                </div>
+            </form>
+            <div id="plot-container">
+                <div id="plot">
+                    <!-- Scatter plot will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

@@ -6,12 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Data</title>
-    <link rel="stylesheet" href="uploadData.css">
+    <link rel="stylesheet" href="css/uploadData.css">
 </head>
 
 <body>
     <%- include('header.ejs', { title: 'Your Title', pageTitle: 'Upload Data' }) %>
-
     <div class="upload-container">
         <h2>Import Data</h2>
         <form action="/uploadData" method="POST" enctype="multipart/form-data">

@@ -29,6 +29,7 @@ STYLING UNTUK HALAMAN HOME
     padding: 50px; /* Adjust padding as needed */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
+    background-color: #FFEAD9;
 }
 
 .option-container img {
@@ -39,6 +40,7 @@ STYLING UNTUK HALAMAN HOME
 
 .option-container h4 {
     margin-top: 10px; /* Adjust margin as needed */
+    color: black;
 }
 
 .option-container:hover {
@@ -69,6 +71,10 @@ button:hover {
     background-color: #45a049;
 }
 
+/* Styling Ringkasan data
+STYLING UNTUK HALAMAN UPLOAD DATA di uploadData.css
+*/
+
 /* STYLING RINGKASAN DATA */
 .container-ringkasan-data {
     /* font-family: Arial, sans-serif; */
@@ -84,8 +90,21 @@ button:hover {
     display: flex;
     flex-direction: column;
     background-color: #aaa;
-    
-    /* align-items: center; */
+  }
+  .isi{
+    display: flex;
+    flex-direction: row;
+    height: 605px;
+  }
+
+  .menu{
+    background-color: #aaa;
+    height: fit-content;
+  }
+
+  .menu-bar {
+    display: flex;
+    flex-direction: column;
   }
 
   .checkbox-container {
@@ -108,6 +127,8 @@ button:hover {
     padding: 10px;
     width: 150px;
     margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 
   .tampilkan-tabel:hover {
@@ -115,6 +136,11 @@ button:hover {
     color: #F47315;
   }
 
+  .tabel-area{
+    height: 100%;
+    padding: 20px;
+  }
+  
   .tabel-ringkasan {
     /* align-items: center;
     justify-content: center; */
