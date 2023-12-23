@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bar Chart</title>
     <link rel="stylesheet" href="css/barChart.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/barChart.js" defer></script>
 </head>
 
@@ -14,29 +15,55 @@
     <%- include('header.ejs', { title: 'Data Promosi Toko Retail', pageTitle: 'Bar Chart' }) %>
     <div id="bar-container">
         <h2>Bar Chart</h2>
-        <form>
+        <form id="bar-chart-form" action="/barChart">
             <div id="axes">
                 <h4 class="axis">Set Axes</h4>
                 <label class="axis">Axis X:</label>
-                <select class="axis" id="x">
-                    <option>a</option>
-                    <option>b</option>
-                    <option>c</option>
+                <select class="axis" id="x" name="x">
+                    <option value="Year_Birth">Year Birth</option>
+                    <option value="Education">Education</option>
+                    <option value="Marital_Status">Marital Status</option>
+                    <option value="Dt_Customer">Date Customer</option>
                 </select>
                 <label class="axis">Axis Y:</label>
-                <select class="axis" id="y">
-                    <option>d</option>
-                    <option>e</option>
-                    <option>f</option>
+                <select class="axis" id="y" name="y">
+                    <option value="Income">Income</option>
+                    <option value="Kidhome">Kidhome</option>
+                    <option value="Teenhome">Teenhome</option>
+                    <option value="MntWines">Amount of Wines</option>
+                    <option value="MntFruits">Amount of Fruits</option>
+                    <option value="MntMeatProducts">Amount of Meat Products</option>
+                    <option value="MntFishProducts">Amount of Fish Products</option>
+                    <option value="MntSweetProducts">Amount of Sweet Products</option>
+                    <option value="MntGoldProds">Amount of Gold Products</option>
+                    <option value="NumDealsPurchases">Number of Deals Purchases</option>
+                    <option value="NumWebPurchases">Number of Web Purchases</option>
+                    <option value="NumCatalogPurchases">Number of Catalog Purchases</option>
+                    <option value="NumStorePurchases">Number of Store Purchases</option>
+                    <option value="NumWebVisitMonth">Number of Web Visits Month</option>
+                    <option value="AcceptedCmp1">Accepted Campaign 1</option>
+                    <option value="AcceptedCmp2">Accepted Campaign 2</option>
+                    <option value="AcceptedCmp3">Accepted Campaign 3</option>
+                    <option value="AcceptedCmp4">Accepted Campaign 4</option>
+                    <option value="AcceptedCmp5">Accepted Campaign 5</option>
+                    <option value="Recency">Recency</option>
+                    <option value="Complain">Complain</option>
+                    <option value="Response">Response</option>
+                </select>
+                <label class="operator">Operator:</label>
+                <select id="operator" name="operator">
+                    <option value="min">MIN</option>
+                    <option value="max">MAX</option>
+                    <option value="avg">AVG</option>
+                    <option value="count">COUNT</option>
+                    <option value="sum">SUM</option>
                 </select>
                 <div class="axis">
                     <button type="submit" id="viewBarChart">Submit</button>
                 </div>
             </div>
         </form> 
-        <div id="chart">
-            
-        </div>   
+        <canvas id="myBarChart" width="400" height="200"></canvas> 
     </div>
 </body>
 
