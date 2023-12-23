@@ -7,6 +7,7 @@ import multer from 'multer';
 import fs from 'fs';
 import csvParser from 'csv-parser';
 import memorystore from 'memorystore'; 
+// import Chart from 'chart.js/auto' ;
 
 const PORT = 3619;
 const app = express();
@@ -177,6 +178,34 @@ app.post('/ringkasan', (req, res) => {
 app.get('/barChart', async (req, res) => {
     res.render('barChart');
 });
+
+app.get('/getBarChartData', async (req, res) => {
+
+    const x = req.query.x ;
+    const y = req.query.y ;
+    const operator = req.query.operator ;
+
+    const data = await getBarChartData(x, y, operator) ;
+
+});
+
+async function getBarChartData(x, y, operator) {
+
+    const conn = db ;
+
+    const query = `select ${x}, ${operator}(${y}) from Marketing_Campaign group by ${x})` ;
+
+    conn.query(query, (error, results) => {
+        if (error) {
+            console.error('Error fetching bar-chart data:', error);
+            res.status(500).send('Internal Server Error');
+        } else {
+            console.log(results);
+            res.json(results);
+        }
+    });
+
+}
 
 //scatter plot ---------------------------------------------------------------------------------------------------------------------
 app.get('/scatterPlot', async (req, res) => {
