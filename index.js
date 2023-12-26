@@ -7,7 +7,7 @@ import multer from 'multer';
 import fs from 'fs';
 import csvParser from 'csv-parser';
 import memorystore from 'memorystore'; 
-
+// import Chart from 'chart.js/auto' ;
 
 const PORT = 3619;
 const app = express();
@@ -20,12 +20,10 @@ const pool = mysql.createPool({
 
 });
 
-
 const staticPath = path.resolve('public');
 const assetsPath = path.resolve('assets');
 const uploadPath = path.resolve('uploads');
 const MemoryStore = memorystore(session);
-
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -36,7 +34,7 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({ dest: 'uploads/' });// Tambahkan .single('file') di sini
 
 
 app.use(express.static(staticPath));
@@ -47,7 +45,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(session({
     cookie: { maxAge: 86400000 },
     store: new MemoryStore({
-      checkPeriod: 86400000, 
+      checkPeriod: 86400000, // prune expired entries every 24h
     }),
     resave: false,
     saveUninitialized: false,
@@ -176,6 +174,34 @@ app.post('/ringkasan', (req, res) => {
 app.get('/barChart', async (req, res) => {
     res.render('barChart');
 });
+
+app.get('/getBarChartData', async (req, res) => {
+
+    const x = req.query.x ;
+    const y = req.query.y ;
+    const operator = req.query.operator ;
+
+    const data = await getBarChartData(x, y, operator) ;
+
+});
+
+async function getBarChartData(x, y, operator) {
+
+    const conn = db ;
+
+    const query = `select ${x}, ${operator}(${y}) from Marketing_Campaign group by ${x})` ;
+
+    conn.query(query, (error, results) => {
+        if (error) {
+            console.error('Error fetching bar-chart data:', error);
+            res.status(500).send('Internal Server Error');
+        } else {
+            console.log(results);
+            res.json(results);
+        }
+    });
+
+}
 
 //scatter plot ---------------------------------------------------------------------------------------------------------------------
 app.get('/scatterPlot', async (req, res) => {
