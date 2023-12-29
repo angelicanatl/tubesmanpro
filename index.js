@@ -146,6 +146,7 @@ app.use(bodyParser.json());
 let isiData = null;
 
 app.get('/ringkasan', async (req, res) => {
+    isiData = null;
     res.render('ringkasan', {
         data: isiData
     });
@@ -155,13 +156,13 @@ app.post('/ringkasan', (req, res) => {
     const {query} = req.body;
     // Execute the query
     pool.query(query, (err, results) => {
-        console.log(results);
+        // console.log(results);
         if (err) {
             console.error('Error executing query:', err);
             res.status(500).json({ error: 'Internal Server Error' });
         }else{
             isiData = results;
-            console.log(isiData);
+            // console.log(isiData);
             // Send the query results as JSON
             res.json({ 
                 data: isiData 
@@ -187,7 +188,7 @@ app.get('/getBarChartData', async (req, res) => {
 
 async function getBarChartData(x, y, operator) {
 
-    const conn = db ;
+    const conn = await db() ;
 
     const query = `select ${x}, ${operator}(${y}) from Marketing_Campaign group by ${x})` ;
 
