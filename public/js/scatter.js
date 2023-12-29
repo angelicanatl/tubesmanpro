@@ -10,10 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
             y: formData.get('y'),
             color: formData.get('color'),
         };
-        console.log(selectedAxes)
+        console.log(selectedAxes);
         // Fetch data from server
         const data = await fetchData(selectedAxes);
-
+        console.log(data);
         // Generate scatter plot
         generateScatterPlot(data, selectedAxes);
     });
@@ -35,14 +35,16 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Data is empty.');
             return;
         }
-    
+
         // Ambil referensi ke elemen plot
         const plotDiv = document.getElementById('plot');
-    
+
         // Buat array untuk label dan data
-        const labels = data.map(entry => entry[selectedAxes.x]);
-        const values = data.map(entry => entry[selectedAxes.y]);
-    
+        const labels = data.map(entry => entry.x);
+        const values = data.map(entry => entry.y);
+
+        console.log(labels);
+        console.log(values);
         // Buat objek dataset untuk Chart.js
         const dataset = {
             labels: labels,
@@ -52,16 +54,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 backgroundColor: selectedAxes.color,
             }],
         };
-    
+
         // Hapus konten yang ada di dalam elemen plot sebelum membuat scatter plot baru
         plotDiv.innerHTML = '';
-    
+
         // Buat elemen canvas untuk scatter plot
         const canvas = document.createElement('canvas');
         canvas.width = 400; // Sesuaikan dengan ukuran yang diinginkan
         canvas.height = 400; // Sesuaikan dengan ukuran yang diinginkan
         plotDiv.appendChild(canvas);
-    
+
         // Mulai menggambar scatter plot menggunakan Chart.js
         const ctx = canvas.getContext('2d');
         new Chart(ctx, {
@@ -69,5 +71,5 @@ document.addEventListener('DOMContentLoaded', () => {
             data: dataset,
         });
     }
-     
+
 });

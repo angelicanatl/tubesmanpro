@@ -207,16 +207,19 @@ async function getBarChartData(x, y, operator) {
 //scatter plot ---------------------------------------------------------------------------------------------------------------------
 app.get('/scatterPlot', async (req, res) => {
     try {
-        const result = await getColumnsName();
+        const result = await getColumnsInfo();
         // Check if the result is an object and has the expected structure
         if (result && Array.isArray(result)) {
-            const columns = result.map(column => column.Field);
-            res.render('scatterPlot', { columns:columns });
+            const numericColumns = result
+                .filter(column => isNumericColumn(column.Type))
+                .map(column => column.Field);
+
+            res.render('scatterPlot', { columns: numericColumns });
         } else {
             throw new Error('Unexpected query result structure');
         }
     } catch (error) {
-        console.error('Error fetching column names:', error);
+        console.error('Error fetching column information:', error);
         res.status(500).send('Internal Server Error');
     }
 });
@@ -235,6 +238,20 @@ const getColumnsName = async () => {
     })
 }
 
+const getColumnsInfo = async () => {
+    return new Promise(async (resolve, reject) =>{
+        const query = `SHOW COLUMNS FROM marketing_campaign`;
+        const conn = await db();
+        conn.query(query, (error, results) =>{
+            if(error){
+                reject(error);
+            }else{
+                resolve(results);
+            }
+        })
+    });
+}
+
 app.get('/scatterData', (req, res) => {
     const { x, y, color } = req.query;
 
@@ -251,6 +268,10 @@ app.get('/scatterData', (req, res) => {
         }
     });
 });
+
+function isNumericColumn(columnType) {
+    return /^int|float|double|decimal$/i.test(columnType);
+}
 
 
 
