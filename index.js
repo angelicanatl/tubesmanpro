@@ -182,22 +182,28 @@ app.get('/getBarChartData', async (req, res) => {
     const y = req.query.y ;
     const operator = req.query.operator ;
 
-    const data = await getBarChartData(x, y, operator) ;
+    // console.log(x) ;
+    // console.log(y) ;
+    // console.log(operator) ;
+
+    await getBarChartData(x, y, operator, res) ;
 
 });
 
-async function getBarChartData(x, y, operator) {
+async function getBarChartData(x, y, operator, res) {
 
-    const conn = await db() ;
-
-    const query = `select ${x}, ${operator}(${y}) from Marketing_Campaign group by ${x})` ;
-
-    conn.query(query, (error, results) => {
+    const query = `
+    SELECT ${x} as x, ${operator}(${y}) AS y
+    FROM marketing_campaign
+    GROUP BY ${x}`;
+    // console.log(params) ;
+   
+    pool.query(query, (error, results) => {
         if (error) {
             console.error('Error fetching bar-chart data:', error);
             res.status(500).send('Internal Server Error');
         } else {
-            console.log(results);
+            // console.log(results);
             res.json(results);
         }
     });

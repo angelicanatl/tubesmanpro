@@ -9,7 +9,7 @@ body {
     height: 100vh;
 }
 
-#bar-container{
+#bar-form-container{
     display: flex;
     flex-direction: column;
     align-items: center;
