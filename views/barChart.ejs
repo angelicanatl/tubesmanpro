@@ -13,14 +13,14 @@
 
 <body>
     <%- include('header.ejs', { title: 'Data Promosi Toko Retail', pageTitle: 'Bar Chart' }) %>
-    <div id="bar-container">
+    <div id="bar-form-container">
         <h2>Bar Chart</h2>
-        <form id="bar-chart-form" action="/barChart">
+        <form id="bar-chart-form" action="/barChart" method="post">
             <div id="axes">
                 <h4 class="axis">Set Axes</h4>
                 <label class="axis">Axis X:</label>
                 <select class="axis" id="x" name="x">
-                    <option value="Year_Birth">Year Birth</option>
+                    <option value='Year_Birth'>Year Birth</option>
                     <option value="Education">Education</option>
                     <option value="Marital_Status">Marital Status</option>
                     <option value="Dt_Customer">Date Customer</option>
@@ -63,7 +63,9 @@
                 </div>
             </div>
         </form> 
-        <canvas id="myBarChart" width="400" height="200"></canvas> 
+        <div class="bar-chart-container">
+            <canvas class="bar-chart-canvas" width="1000" height="400"></canvas> 
+        </div>
     </div>
 </body>
 
