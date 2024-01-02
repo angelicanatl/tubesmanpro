@@ -125,7 +125,6 @@ app.post('/uploadData', upload.single('file_upload'), (req, res) => {
         };
 
         const query = 'INSERT INTO marketing_campaign SET ?';
-        console.log(query);
         conn.query(query, marketing_campaign, (error, results, fields) => {
           if (error) {
             console.error('Error importing data to marketing_campaign table:', error);
