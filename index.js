@@ -76,7 +76,6 @@ app.get('/header', async (req, res) => {
     res.render('header');
 });
 
-//upload data -----------------------------------------------------------------------------------------------------------------------
 app.get('/uploadData', async (req, res) => {
     res.render('uploadData');
 });

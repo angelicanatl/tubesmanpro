@@ -15,21 +15,32 @@
         <h2>Import Data</h2>
         <form action="/uploadData" method="POST" enctype="multipart/form-data">
             <div class="navigator_import_data">
-              <div class="pembungkus_import_data">
-                <div class="img_import_data">
-                  <img src="../assets/icon/upload.jpg" height="150px" width="150px">
+                <div class="pembungkus_import_data">
+                    <div class="img_import_data">
+                        <img src="../assets/icon/upload.jpg" height="150px" width="150px">
+                    </div>
+                    <label for="file_upload" class="custom-file-upload">
+                        <span>Upload File</span>
+                        <input type="file" id="file_upload" name="file_upload" onchange="checkFile()">
+                    </label>
                 </div>
-                <label for="file_upload" class="custom-file-upload">
-                  <span>Upload File</span>
-                  <input type="file" id="file_upload" name="file_upload">
-                </label>
-              </div>
-              <div class="import_button_data">
-                <button type="submit" class="blue_button">Import</button>
-              </div>
+                <div class="import_button_data">
+                    <button type="submit" class="blue_button" id="importButton" disabled>Import</button>
+                </div>
             </div>
-        </form>    
+        </form>
     </div>
+
+    <script>
+        function checkFile() {
+            // Mendapatkan elemen input file dan tombol "Import"
+            var fileInput = document.getElementById('file_upload');
+            var importButton = document.getElementById('importButton');
+
+            // Menonaktifkan tombol "Import" jika tidak ada file yang dipilih
+            importButton.disabled = !fileInput.files.length;
+        }
+    </script>
 </body>
 
 </html>
